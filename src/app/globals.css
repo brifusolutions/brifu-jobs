@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --app-bg: #0b1220;
-  --app-fg: #e5e7eb;
+  --app-bg: #f0f2f7;
+  --app-fg: #152539;
 }
 
 html,
@@ -15,27 +15,68 @@ body {
 body {
   background: var(--app-bg);
   color: var(--app-fg);
+  font-family: var(--font-outfit), sans-serif;
 }
 
 @layer utilities {
   .card {
-    @apply rounded-2xl border border-slate-800 bg-[#111827] shadow-soft;
+    @apply rounded-lg border bg-white;
+    border-color: #dce2ec;
   }
 
   .card-muted {
-    @apply rounded-2xl border border-slate-800 bg-slate-900/40;
+    @apply rounded-lg border bg-white;
+    border-color: #dce2ec;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:opacity-95 active:opacity-90 disabled:cursor-not-allowed disabled:opacity-60;
+    @apply inline-flex items-center justify-center gap-2 rounded px-4 py-2 text-sm font-medium text-white transition disabled:cursor-not-allowed disabled:opacity-60;
+    background: #1a3a5c;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-700 bg-slate-900/70 px-4 py-2 text-sm font-semibold text-slate-100 shadow-sm transition hover:bg-slate-800 active:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-60;
+    @apply inline-flex items-center justify-center gap-2 rounded border px-4 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-60;
+    background: transparent;
+    border-color: #dce2ec;
+    color: #6c7a89;
   }
 }
 
 body {
-  background: #0b1220;
-  color: #e5e7eb;
+  background: #f0f2f7;
+  color: #152539;
+}
+
+input,
+select,
+textarea {
+  background: #ffffff !important;
+  color: #1c2d42 !important;
+  border-color: #dce2ec !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #95a3b5 !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #152539 !important;
+}
+
+.text-white:not(.btn-primary),
+.text-slate-100,
+.text-slate-200,
+.text-slate-300 {
+  color: #152539 !important;
+}
+
+.text-slate-400,
+.text-slate-500 {
+  color: #6c7a89 !important;
 }

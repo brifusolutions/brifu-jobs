@@ -19,6 +19,7 @@ export default function UploadPage() {
   const [analyzeExperience, setAnalyzeExperience] = useState(true);
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
   const [selectedExperience, setSelectedExperience] = useState<ExperienceFilterValue>("all");
+  const [customSkillsInput, setCustomSkillsInput] = useState("");
   const progressTimer = useRef<number | null>(null);
   const { toast } = useToast();
   const router = useRouter();
@@ -44,8 +45,12 @@ export default function UploadPage() {
       const includeFields = ["name", "email", "phone"];
       if (analyzeSkills) includeFields.push("skills");
       if (analyzeExperience) includeFields.push("experience");
+      const manualSkills = customSkillsInput
+        .split(",")
+        .map((item) => item.trim().toLowerCase())
+        .filter(Boolean);
 
-      const result = await uploadResumes(files, includeFields);
+      const result = await uploadResumes(files, includeFields, manualSkills);
 
       saveLastResult(result);
       saveResultFilters({ skills: selectedSkills, experience: selectedExperience });
@@ -78,8 +83,8 @@ export default function UploadPage() {
   return (
     <div className="space-y-3">
       <div>
-        <div className="text-xl font-semibold tracking-tight text-white">Upload Resumes</div>
-        <div className="mt-1 text-sm text-slate-400">
+        <div className="text-xl font-semibold tracking-tight text-[#152539]">Upload Resumes</div>
+        <div className="mt-1 text-sm text-[#6c7a89]">
           Upload one or more PDFs. We’ll extract name, email, phone, skills, and experience.
         </div>
       </div>
@@ -87,25 +92,25 @@ export default function UploadPage() {
       <CompactUploadBox files={files} onFilesChange={setFiles} disabled={loading} />
 
       <div className="card p-4">
-        <div className="text-sm font-semibold text-slate-100">Data To Analyze</div>
-        <div className="mt-1 text-xs text-slate-400">
+        <div className="text-sm font-semibold text-[#152539]">Data To Analyze</div>
+        <div className="mt-1 text-xs text-[#6c7a89]">
           Name, Email, and Phone are always included. Select extra fields if needed.
         </div>
         <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
-          <label className="inline-flex items-center gap-2 text-sm text-slate-200">
+          <label className="inline-flex items-center gap-2 text-sm text-[#152539]">
             <input
               type="checkbox"
-              className="h-4 w-4 rounded border-slate-600 bg-slate-900 text-primary"
+              className="h-4 w-4 rounded border-[#dce2ec] bg-white text-primary"
               checked={analyzeSkills}
               onChange={(e) => setAnalyzeSkills(e.target.checked)}
               disabled={loading}
             />
             Analyze Skills
           </label>
-          <label className="inline-flex items-center gap-2 text-sm text-slate-200">
+          <label className="inline-flex items-center gap-2 text-sm text-[#152539]">
             <input
               type="checkbox"
-              className="h-4 w-4 rounded border-slate-600 bg-slate-900 text-primary"
+              className="h-4 w-4 rounded border-[#dce2ec] bg-white text-primary"
               checked={analyzeExperience}
               onChange={(e) => setAnalyzeExperience(e.target.checked)}
               disabled={loading}
@@ -113,13 +118,29 @@ export default function UploadPage() {
             Analyze Experience
           </label>
         </div>
+        <div className="mt-4">
+          <label className="mb-1 block text-xs font-semibold uppercase tracking-wide text-[#8a97a9]">
+            Manual Skills To Detect
+          </label>
+          <input
+            type="text"
+            value={customSkillsInput}
+            onChange={(e) => setCustomSkillsInput(e.target.value)}
+            disabled={loading}
+            placeholder="Example: react, nextjs, fastapi"
+            className="w-full rounded-lg border border-[#dce2ec] bg-white px-3 py-2 text-sm text-[#152539] placeholder:text-[#95a3b5] focus:border-[#8aafd4] focus:outline-none"
+          />
+          <div className="mt-1 text-xs text-[#6c7a89]">
+            These are added only if found in each resume text, then saved to MongoDB.
+          </div>
+        </div>
       </div>
 
       <div className="card p-4">
         <div className="flex items-center justify-between gap-3">
           <div>
-            <div className="text-sm font-semibold text-slate-100">Filter Candidates</div>
-            <div className="text-xs text-slate-400">Apply after processing on results table.</div>
+            <div className="text-sm font-semibold text-[#152539]">Filter Candidates</div>
+            <div className="text-xs text-[#6c7a89]">Apply after processing on results table.</div>
           </div>
           <button
             type="button"
@@ -139,7 +160,7 @@ export default function UploadPage() {
           <ExperienceFilter value={selectedExperience} onChange={setSelectedExperience} />
         </div>
 
-        <div className="mt-2 text-xs text-slate-400">
+        <div className="mt-2 text-xs text-[#6c7a89]">
           {selectedSkills.length ? `Skills: ${selectedSkills.join(", ")}` : "Skills: All"} | Experience:{" "}
           {selectedExperience === "all"
             ? "All"
@@ -154,8 +175,8 @@ export default function UploadPage() {
       <div className="card p-4">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <div className="text-sm font-semibold text-slate-100">Processing</div>
-            <div className="mt-1 text-xs text-slate-400">
+            <div className="text-sm font-semibold text-[#152539]">Processing</div>
+            <div className="mt-1 text-xs text-[#6c7a89]">
               {loading ? "Analyzing resumes…" : "Ready when you are."}
             </div>
           </div>
@@ -178,7 +199,7 @@ export default function UploadPage() {
 
         <div className="mt-3">
           <SmallProgressBar value={loading ? progress : 0} />
-          <div className="mt-1 flex items-center justify-between text-xs text-slate-400">
+          <div className="mt-1 flex items-center justify-between text-xs text-[#6c7a89]">
             <span>{loading ? `${progress}%` : "0%"}</span>
             <span>
               {Math.min(files.length, Math.floor((Math.max(progress, 1) / 100) * files.length))}/{files.length} files

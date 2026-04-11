@@ -47,8 +47,8 @@ export function CompactUploadBox({
     <div className="card p-4">
       <div
         className={cn(
-          "relative flex min-h-[120px] cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-slate-700 bg-slate-900/40 p-4 text-center transition",
-          dragActive && "border-primary bg-blue-950/30",
+          "relative flex min-h-[120px] cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-[#dce2ec] bg-white p-4 text-center transition",
+          dragActive && "border-[#8aafd4] bg-[#f6f9fd]",
           disabled && "cursor-not-allowed opacity-70",
         )}
         onClick={() => !disabled && inputRef.current?.click()}
@@ -88,12 +88,12 @@ export function CompactUploadBox({
           <UploadCloud className="h-4 w-4" />
           <span className="text-sm font-semibold">Drag & drop PDF resumes</span>
         </div>
-        <div className="mt-1 text-xs text-slate-400">or click to browse</div>
-        <div className="mt-3 flex items-center gap-2 text-xs text-slate-300">
-          <span className="rounded-full bg-slate-800 px-2 py-0.5">
+        <div className="mt-1 text-xs text-[#6c7a89]">or click to browse</div>
+        <div className="mt-3 flex items-center gap-2 text-xs text-[#6c7a89]">
+          <span className="rounded-full bg-[#eef3f8] px-2 py-0.5">
             {stats.count} file{stats.count === 1 ? "" : "s"}
           </span>
-          <span className="rounded-full bg-slate-800 px-2 py-0.5">{formatBytes(stats.totalBytes)}</span>
+          <span className="rounded-full bg-[#eef3f8] px-2 py-0.5">{formatBytes(stats.totalBytes)}</span>
         </div>
       </div>
 
@@ -102,18 +102,18 @@ export function CompactUploadBox({
           {files.map((f) => (
             <li
               key={`${f.name}_${f.size}`}
-              className="flex items-center justify-between rounded-lg border border-slate-700 bg-slate-900/50 px-3 py-2"
+              className="flex items-center justify-between rounded-lg border border-[#dce2ec] bg-white px-3 py-2"
             >
               <div className="flex min-w-0 items-center gap-2">
-                <FileText className="h-4 w-4 text-slate-300" />
+                <FileText className="h-4 w-4 text-[#6c7a89]" />
                 <div className="min-w-0">
-                  <div className="truncate text-sm text-slate-100">{f.name}</div>
-                  <div className="text-xs text-slate-400">{formatBytes(f.size)}</div>
+                  <div className="truncate text-sm text-[#152539]">{f.name}</div>
+                  <div className="text-xs text-[#6c7a89]">{formatBytes(f.size)}</div>
                 </div>
               </div>
               <button
                 type="button"
-                className="rounded p-1 text-slate-500 hover:bg-slate-800 hover:text-slate-100"
+                className="rounded p-1 text-[#6c7a89] hover:bg-[#f0f2f7] hover:text-[#152539]"
                 onClick={() => onFilesChange(files.filter((x) => !(x.name === f.name && x.size === f.size)))}
                 disabled={disabled}
                 aria-label={`Remove ${f.name}`}

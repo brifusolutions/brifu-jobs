@@ -11,11 +11,11 @@ export function ExperienceFilter({
 }) {
   return (
     <div className="space-y-2">
-      <div className="text-sm font-medium text-slate-200">Experience</div>
+      <div className="text-sm font-medium text-[#152539]">Experience</div>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value as ExperienceFilterValue)}
-        className="w-full rounded-lg border border-slate-700 bg-slate-900 px-2.5 py-2 text-sm text-slate-100 outline-none ring-primary/30 focus:ring-2"
+        className="w-full rounded-lg border border-[#dce2ec] bg-white px-2.5 py-2 text-sm text-[#152539] outline-none focus:ring-2 focus:ring-[#8aafd4]/40"
       >
         <option value="all">All</option>
         <option value="fresher">Fresher</option>

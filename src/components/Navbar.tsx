@@ -1,34 +1,18 @@
 "use client";
 
-import { LogOut } from "lucide-react";
-import { usePathname } from "next/navigation";
-import React, { useMemo } from "react";
-
-const titleByPath: Record<string, string> = {
-  "/dashboard": "Admin Dashboard",
-  "/upload": "Upload Resumes",
-  "/results": "Parsed Results",
-  "/analytics": "Analytics",
-  "/settings": "Settings",
-};
-
 export function Navbar() {
-  const pathname = usePathname();
-  const title = useMemo(() => titleByPath[pathname] || "Admin Panel", [pathname]);
-
   return (
-    <header className="sticky top-0 z-20 border-b border-slate-800 bg-[#0B1220]/90 backdrop-blur">
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="text-sm font-semibold text-white">{title}</div>
-        <div className="flex items-center gap-2">
-          <div className="hidden text-sm text-slate-300 sm:block">Signed in as Admin</div>
-          <div className="h-8 w-px bg-slate-800" />
-          <div>
-            <button type="button" className="btn-secondary rounded-xl px-3 py-1.5 text-xs">
-              <LogOut className="h-3.5 w-3.5" />
-              Logout
-            </button>
+    <header className="card mx-auto mt-5 w-full max-w-[1200px] px-4 py-3">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <div className="text-[38px] leading-none text-[#152539]" style={{ fontFamily: "var(--font-cormorant)" }}>
+            Resume Dashboard
           </div>
+          <div className="mt-1 text-xs text-[#6c7a89]">Filter and analyze submitted resumes</div>
+        </div>
+        <div className="flex items-center gap-2">
+          <button className="btn-secondary h-8 px-3 text-xs">Export</button>
+          <button className="btn-primary h-8 px-3 text-xs">Upload</button>
         </div>
       </div>
     </header>

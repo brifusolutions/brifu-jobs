@@ -74,8 +74,8 @@ export function DataTable({
       <button
         type="button"
         className={cn(
-          "inline-flex items-center gap-1 text-left text-xs font-semibold uppercase tracking-wide text-slate-400 hover:text-white",
-          active && "text-white",
+          "inline-flex items-center gap-1 text-left text-xs font-semibold uppercase tracking-wide text-[#8896a8] hover:text-[#152539]",
+          active && "text-[#152539]",
         )}
         onClick={() => toggleSort(k)}
       >
@@ -93,15 +93,15 @@ export function DataTable({
 
   return (
     <div className="card overflow-hidden">
-      <div className="flex flex-col gap-3 border-b border-slate-800 bg-[#111827] p-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-3 border-b border-[#dce2ec] bg-white p-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <div className="text-sm font-semibold text-white">Parsed Candidates</div>
-          <div className="text-sm text-slate-400">
+          <div className="text-sm font-semibold text-[#152539]">Parsed Candidates</div>
+          <div className="text-sm text-[#6c7a89]">
             {loading ? "Processing…" : `${sorted.length} result${sorted.length === 1 ? "" : "s"}`}
           </div>
         </div>
         <div className="relative w-full sm:max-w-sm">
-          <Search className="pointer-events-none absolute left-3 top-2.5 h-4 w-4 text-slate-500" />
+          <Search className="pointer-events-none absolute left-3 top-2.5 h-4 w-4 text-[#95a3b5]" />
           <input
             value={q}
             onChange={(e) => {
@@ -109,52 +109,52 @@ export function DataTable({
               setPage(1);
             }}
             placeholder="Search name, skills, email, phone…"
-            className="w-full rounded-2xl border border-slate-700 bg-slate-900 py-2 pl-9 pr-3 text-sm text-slate-100 outline-none ring-primary/30 placeholder:text-slate-500 focus:ring-4"
+            className="w-full rounded border border-[#dce2ec] bg-white py-2 pl-9 pr-3 text-sm text-[#152539] outline-none placeholder:text-[#95a3b5] focus:ring-2 focus:ring-[#8aafd4]/30"
           />
         </div>
       </div>
 
       <div className="overflow-x-auto">
         <table className="min-w-full text-left">
-          <thead className="bg-slate-900/70">
+          <thead className="bg-white">
             <tr>
               <th className="px-4 py-3">{headerBtn("name", "Name")}</th>
               <th className="px-4 py-3">{headerBtn("email", "Email")}</th>
               <th className="px-4 py-3">{headerBtn("phone", "Phone")}</th>
               {showSkills ? (
-                <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wide text-slate-400">Skills</th>
+                <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wide text-[#8896a8]">Skills</th>
               ) : null}
               {showExperience ? <th className="px-4 py-3">{headerBtn("experience", "Experience")}</th> : null}
-              <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide text-slate-400">
+              <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide text-[#8896a8]">
                 Action
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800 bg-[#111827]">
+          <tbody className="divide-y divide-[#dce2ec] bg-white">
             {loading ? (
               Array.from({ length: 6 }).map((_, i) => (
                 <tr key={i}>
                   <td className="px-4 py-4">
-                    <div className="h-4 w-40 animate-pulse rounded bg-slate-800" />
+                    <div className="h-4 w-40 animate-pulse rounded bg-[#e9edf3]" />
                   </td>
                   <td className="px-4 py-4">
-                    <div className="h-4 w-56 animate-pulse rounded bg-slate-800" />
+                    <div className="h-4 w-56 animate-pulse rounded bg-[#e9edf3]" />
                   </td>
                   <td className="px-4 py-4">
-                    <div className="h-4 w-32 animate-pulse rounded bg-slate-800" />
+                    <div className="h-4 w-32 animate-pulse rounded bg-[#e9edf3]" />
                   </td>
                   {showSkills ? (
                     <td className="px-4 py-4">
-                      <div className="h-4 w-48 animate-pulse rounded bg-slate-800" />
+                      <div className="h-4 w-48 animate-pulse rounded bg-[#e9edf3]" />
                     </td>
                   ) : null}
                   {showExperience ? (
                     <td className="px-4 py-4">
-                      <div className="h-4 w-28 animate-pulse rounded bg-slate-800" />
+                      <div className="h-4 w-28 animate-pulse rounded bg-[#e9edf3]" />
                     </td>
                   ) : null}
                   <td className="px-4 py-4 text-right">
-                    <div className="ml-auto h-8 w-16 animate-pulse rounded-xl bg-slate-800" />
+                    <div className="ml-auto h-8 w-16 animate-pulse rounded bg-[#e9edf3]" />
                   </td>
                 </tr>
               ))
@@ -162,26 +162,26 @@ export function DataTable({
               paged.map((r, idx) => (
                 <tr
                   key={`${r.email || r.phone || r.filename || idx}`}
-                  className="transition hover:bg-slate-900/60"
+                  className="transition hover:bg-[#f7f9fc]"
                 >
-                  <td className="px-4 py-4 text-sm font-semibold text-slate-100">
+                  <td className="px-4 py-4 text-sm font-semibold text-[#152539]">
                     {r.name || "—"}
                     {r.error ? (
-                      <div className="mt-1 text-xs font-medium text-rose-400">
+                      <div className="mt-1 text-xs font-medium text-[#a25b5b]">
                         {r.error}
                       </div>
                     ) : null}
                   </td>
-                  <td className="px-4 py-4 text-sm text-slate-300">{r.email || "—"}</td>
-                  <td className="px-4 py-4 text-sm text-slate-300">{r.phone || "—"}</td>
+                  <td className="px-4 py-4 text-sm text-[#6c7a89]">{r.email || "—"}</td>
+                  <td className="px-4 py-4 text-sm text-[#6c7a89]">{r.phone || "—"}</td>
                   {showSkills ? (
-                    <td className="px-4 py-4 text-sm text-slate-300">
+                    <td className="px-4 py-4 text-sm text-[#6c7a89]">
                       {r.skills?.length ? (
                         <div className="flex flex-wrap gap-1.5">
                           {r.skills.map((skill) => (
                             <span
                               key={`${r.slug || r.email || r.phone || "candidate"}-${skill}`}
-                              className="rounded-full border border-sky-500/30 bg-sky-500/10 px-2 py-0.5 text-xs text-sky-200"
+                              className="rounded border border-[#c7d9eb] bg-[#e1eaf4] px-2 py-0.5 text-xs text-[#2e587f]"
                             >
                               {skill}
                             </span>
@@ -192,11 +192,11 @@ export function DataTable({
                       )}
                     </td>
                   ) : null}
-                  {showExperience ? <td className="px-4 py-4 text-sm text-slate-300">{r.experience || "—"}</td> : null}
+                  {showExperience ? <td className="px-4 py-4 text-sm text-[#6c7a89]">{r.experience || "—"}</td> : null}
                   <td className="px-4 py-4 text-right">
                     <button
                       type="button"
-                      className="inline-flex items-center gap-1 rounded-xl px-2.5 py-1.5 text-xs font-medium text-slate-400 transition hover:bg-rose-500/10 hover:text-rose-300"
+                      className="inline-flex items-center gap-1 rounded border border-[#c98282] bg-transparent px-2.5 py-1.5 text-xs font-medium text-[#a25b5b] transition"
                       onClick={() => onDeleteRow?.(r)}
                     >
                       <Trash2 className="h-3.5 w-3.5" />
@@ -208,7 +208,7 @@ export function DataTable({
             ) : (
               <tr>
                 <td
-                  className="px-4 py-10 text-sm text-slate-400"
+                  className="px-4 py-10 text-sm text-[#6c7a89]"
                   colSpan={4 + (showSkills ? 1 : 0) + (showExperience ? 1 : 0)}
                 >
                   No results yet. Upload PDFs to see parsed candidates here.
@@ -219,10 +219,10 @@ export function DataTable({
         </table>
       </div>
 
-      <div className="flex items-center justify-between gap-3 border-t border-slate-800 bg-[#111827] p-4">
-        <div className="text-sm text-slate-400">
-          Page <span className="font-semibold text-slate-100">{safePage}</span> of{" "}
-          <span className="font-semibold text-slate-100">{totalPages}</span>
+      <div className="flex items-center justify-between gap-3 border-t border-[#dce2ec] bg-white p-4">
+        <div className="text-sm text-[#6c7a89]">
+          Page <span className="font-semibold text-[#152539]">{safePage}</span> of{" "}
+          <span className="font-semibold text-[#152539]">{totalPages}</span>
         </div>
         <div className="flex items-center gap-2">
           <button

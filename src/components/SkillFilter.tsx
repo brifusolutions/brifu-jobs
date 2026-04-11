@@ -21,7 +21,7 @@ export function SkillFilter({
 
   return (
     <div className="space-y-2">
-      <div className="text-sm font-medium text-slate-200">Skills</div>
+      <div className="text-sm font-medium text-[#152539]">Skills</div>
       <div className="flex flex-wrap gap-2">
         {options.map((skill) => {
           const active = selected.includes(skill);
@@ -33,8 +33,8 @@ export function SkillFilter({
               className={cn(
                 "rounded-lg border px-2.5 py-1 text-xs transition",
                 active
-                  ? "border-primary bg-primary/20 text-sky-200"
-                  : "border-slate-700 bg-slate-900 text-slate-300 hover:border-slate-500 hover:text-slate-100",
+                  ? "border-[#bfd4ea] bg-[#e3edf7] text-[#335c84]"
+                  : "border-[#dce2ec] bg-white text-[#152539] hover:border-[#8aafd4]",
               )}
             >
               {skill}

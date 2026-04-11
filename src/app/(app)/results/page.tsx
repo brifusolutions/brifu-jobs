@@ -113,11 +113,11 @@ export default function ResultsPage() {
     <div className="space-y-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <div className="text-2xl font-semibold tracking-tight text-white">Parsed Results</div>
-          <div className="mt-1 text-sm text-slate-400">
+          <div className="text-2xl font-semibold tracking-tight text-[#152539]">Parsed Results</div>
+          <div className="mt-1 text-sm text-[#6c7a89]">
             Search, sort, delete, and export parsed candidate data. {result ? `${resultCount} shown.` : ""}
           </div>
-          <div className="mt-1 text-xs text-slate-500">
+          <div className="mt-1 text-xs text-[#6c7a89]">
             Filters: {filterSkills.length ? `Skills (${filterSkills.join(", ")})` : "Skills (All)"} | Experience (
             {filterExperience === "all"
               ? "All"
